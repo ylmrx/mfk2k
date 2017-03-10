@@ -30,8 +30,7 @@ config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 8), 0],
             u'Message priv\xe9': [ 'blink', (outp, bank, 3, 2, 45, 12), 0],
             'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0],
             'down': [ 'kit_crit', (outp, bank, 85), 127],
-            'critical': [ 'kit', (outp, bank, 3, 90), 127],
-
+            'critical': [ 'kit', (outp, bank, 3, 90), 127]
          }
 
 def listen(inp, outp):
