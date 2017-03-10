@@ -60,19 +60,6 @@ def print_notification(bus, message):
                 col = config[a][1][3]
                 k2000.dial(outp, bank, line, col, config[a][2])
             print a
-#            conf = (outp,)
-#            conf += config[a][1]
-#            #t = threading.Thread(target=k2000.kit, args=(outp, 4, 3, 112, lambda: stop_threads))
-#            if a == 'app1':
-#                t = threading.Thread(target=k2000.kit, args=conf)
-#                t.setDaemon = True
-#                t.start()
-#            if a == 'app2':
-#                t = threading.Thread(target=k2000.auto, args=(outp, bank, 2, 2))
-#                t.setDaemon = True
-#                t.start()
-#            if a == 'app3' or a == 'app4':
-#                getattr(k2000, config[a][0])(*config[a][1])
 
 if __name__ == '__main__':
     p = Process(target=listen, args=(inp,outp))
