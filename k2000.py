@@ -38,7 +38,23 @@ def dial(out, bank, line, col, num):
     active_knob.append(b)
 
 
+def kit_crit(out, bank, color):
+    for i in xrange(3):
+        for i in xrange(4):
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 0, color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 4, color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 8, color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 12, color)
+            attente = 0.1
+            time.sleep(attente)
+        for i in xrange(4):
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 0, default_color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 4, default_color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 8, default_color)
+            out.write_short(0xb1, i + ((bank - 1) * 16) + 12, default_color)
+
 def kit(out, bank, line, color):
+    for i in xrange(3):
         for i in xrange(4):
             out.write_short(0xb1, i + ((bank - 1) * 16) + ((line - 1) * 4), color)
             attente = 0.1

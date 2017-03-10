@@ -27,7 +27,12 @@ config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 8), 0],
             'general': [ 'blink', (outp, bank, 4, 3, 42, 14), 0],
             'Poolp Fiction': [ 'blink', (outp, bank, 4, 2, 40, 13), 0],
             'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 50, 127), 0],
-            'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0]}
+            u'Message priv\xe9': [ 'blink', (outp, bank, 3, 2, 45, 12), 0],
+            'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0],
+            'down': [ 'kit_crit', (outp, bank, 85), 127],
+            'critical': [ 'kit', (outp, bank, 3, 90), 127],
+
+         }
 
 def listen(inp, outp):
     while True:
@@ -46,6 +51,7 @@ def print_notification(bus, message):
     args = message.get_args_list()
     if len(args) == 8:
         notification = dict([(keys[i], args[i]) for i in range(8)])
+        print notification
         a = notification['summary']
         if notification['app_name'] == 'Thunderbird':
            a = notification['app_name']
