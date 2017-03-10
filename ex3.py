@@ -9,7 +9,7 @@ from multiprocessing import Process
 
 midi.init()
 device = "Midi Fighter Twister MIDI 1"
-
+mail = 0
 bank = 4
 
 for i in range(midi.get_count()):
@@ -22,10 +22,12 @@ for i in range(midi.get_count()):
         k2000.initialize_mf(outp, bank)
         break
 
-config = { 'app1': [ 'kit', (bank, 1, 78)],
-            'app2': [ 'auto', (bank, 1, 2)],
-            'app3': [ 'dial', (outp, bank, 3, 3, 100)],
-            'app4': [ 'blink', (outp, bank, 4, 1, 50, 13)] }
+config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 8), 0],
+            'bot-otrs': [ 'blink', (outp, bank, 3, 1, 100, 14), 0],
+            'general': [ 'blink', (outp, bank, 4, 3, 42, 14), 0],
+            'Poolp Fiction': [ 'blink', (outp, bank, 4, 2, 40, 13), 0],
+            'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 50, 127), 0],
+            'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0]}
 
 def listen(inp, outp):
     while True:
@@ -36,10 +38,7 @@ def listen(inp, outp):
                     outp.write_short(0xb0, p[0][1], 0)
                     outp.write_short(0xb2, p[0][1], 0)
                     outp.write_short(0xb1, p[0][1], k2000.default_color)
-
         time.sleep(0.5)
-
-
 
 def print_notification(bus, message):
     keys = ["app_name", "replaces_id", "app_icon", "summary",
@@ -48,21 +47,32 @@ def print_notification(bus, message):
     if len(args) == 8:
         notification = dict([(keys[i], args[i]) for i in range(8)])
         a = notification['summary']
+        if notification['app_name'] == 'Thunderbird':
+           a = notification['app_name']
         if a in config.keys():
+            getattr(k2000, config[a][0])(*config[a][1])
+            if config[a][2] < 123:
+                config[a][2] += 10
+                print config[a][2]
+                outp = config[a][1][0]
+                bank = config[a][1][1]
+                line = config[a][1][2]
+                col = config[a][1][3]
+                k2000.dial(outp, bank, line, col, config[a][2])
             print a
-            conf = (outp,)
-            conf += config[a][1]
-            #t = threading.Thread(target=k2000.kit, args=(outp, 4, 3, 112, lambda: stop_threads))
-            if a == 'app1':
-                t = threading.Thread(target=k2000.kit, args=conf)
-                t.setDaemon = True
-                t.start()
-            if a == 'app2':
-                t = threading.Thread(target=k2000.auto, args=(outp, bank, 2, 2))
-                t.setDaemon = True
-                t.start()
-            if a == 'app3' or a == 'app4':
-                getattr(k2000, config[a][0])(*config[a][1])
+#            conf = (outp,)
+#            conf += config[a][1]
+#            #t = threading.Thread(target=k2000.kit, args=(outp, 4, 3, 112, lambda: stop_threads))
+#            if a == 'app1':
+#                t = threading.Thread(target=k2000.kit, args=conf)
+#                t.setDaemon = True
+#                t.start()
+#            if a == 'app2':
+#                t = threading.Thread(target=k2000.auto, args=(outp, bank, 2, 2))
+#                t.setDaemon = True
+#                t.start()
+#            if a == 'app3' or a == 'app4':
+#                getattr(k2000, config[a][0])(*config[a][1])
 
 if __name__ == '__main__':
     p = Process(target=listen, args=(inp,outp))
@@ -76,21 +86,3 @@ if __name__ == '__main__':
     outp.close
     inp.close
     p.join()
-
-#g = threading.Thread(target=glib.MainLoop().run())
-#g.start()
-
-# main()
-# time.sleep(2)
-# print threading.enumerate()
-# time.sleep(6)
-# stop_threads = True
-# for i in runnings:
-#     i.join()
-# print threading.enumerate()
-# 
-# k2000.blink(outp, 4, 2, 3, 64, 6)
-# time.sleep(7)
-# k2000.cut(outp, 4, 2, 3)
-# k2000.cut(outp, 4, 2, 2)
-# outp.close
