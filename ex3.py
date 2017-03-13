@@ -67,17 +67,21 @@ def print_notification(bus, message):
            a = notification['app_name']
         if a in config.keys():
             getattr(k2000, config[a][0])(*config[a][1])
+            print config[a][1]
+            print config[a][2]
             if len(config[a]) == 3:
-                if config[a][2] < 123:
-                    if r.value == ((config[a][1][1] - 1) * 16) + ((config[a][1][2] - 1) * 4) + config[a][1][3] - 1:
-                        config[a][2] = 0
-                        r.value = 0
-                    config[a][2] += 10
-                    outp = config[a][1][0]
-                    bank = config[a][1][1]
-                    line = config[a][1][2]
-                    col = config[a][1][3]
+                if r.value == ((config[a][1][1] - 1) * 16) + ((config[a][1][2] - 1) * 4) + config[a][1][3] - 1:
+                    config[a][2] = 0
+                    r.value = 0
+                config[a][2] += 10
+                outp = config[a][1][0]
+                bank = config[a][1][1]
+                line = config[a][1][2]
+                col = config[a][1][3]
+                if config[a][2] < 127:
                     k2000.dial(outp, bank, line, col, config[a][2])
+                else:
+                    k2000.dial(outp, bank, line, col, 127)
             print a
 
 if __name__ == '__main__':
