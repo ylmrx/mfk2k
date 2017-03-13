@@ -12,7 +12,7 @@ from multiprocessing import Value
 midi.init()
 device = "Midi Fighter Twister MIDI 1"
 mail = 0
-bank = 4
+bank = 3
 
 for i in range(midi.get_count()):
     devInfo = midi.get_device_info(i)
