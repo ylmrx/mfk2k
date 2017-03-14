@@ -26,9 +26,9 @@ for i in range(midi.get_count()):
 
 config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 6), 0],
             'bot-otrs': [ 'blink', (outp, bank, 3, 1, 100, 14), 0],
-            'general': [ 'blink', (outp, bank, 4, 3, 42, 14), 0],
-            'Poolp Fiction': [ 'blink', (outp, bank, 4, 2, 40, 13), 0],
-            'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 50, 127), 0],
+            'general': [ 'blink', (outp, bank, 4, 3, 42, 10), 0],
+            'Poolp Fiction': [ 'blink', (outp, bank, 4, 2, 64, 13), 0],
+            'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 112, 127), 0],
             u'Message priv\xe9': [ 'blink', (outp, bank, 3, 2, 45, 12), 0],
             'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0],
             'down': [ 'kit_crit', (outp, bank, 85)],
