@@ -31,8 +31,8 @@ config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 6), 0],
             'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 112, 127), 0],
             u'Message priv\xe9': [ 'blink', (outp, bank, 3, 2, 45, 12), 0],
             'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0],
-            'down': [ 'kit_crit', (outp, bank, 85)],
-            'critical': [ 'kit', (outp, bank, 3, 90)] }
+            'down': [ 'blink', (outp, bank, 2, 1, 42, 10), 0],
+            'critical': [ 'blink', (outp, bank, 2, 2, 50, 13), 0] }
 
 
 
