@@ -4,15 +4,17 @@ import threading
 import k2000
 import glib
 import dbus
-import numpy as np
 from dbus.mainloop.glib import DBusGMainLoop
 from multiprocessing import Process
 from multiprocessing import Value
 
+import json
+
 midi.init()
 device = "Midi Fighter Twister MIDI 1"
+conf_file = "./config.json"
 mail = 0
-bank = 3
+bank = 4
 
 for i in range(midi.get_count()):
     devInfo = midi.get_device_info(i)
@@ -24,17 +26,13 @@ for i in range(midi.get_count()):
         k2000.initialize_mf(outp, bank)
         break
 
-config = { 'cs': [ 'blink', (outp, bank, 4, 4, 31, 6), 0],
-            'bot-otrs': [ 'blink', (outp, bank, 3, 1, 100, 14), 0],
-            'general': [ 'blink', (outp, bank, 4, 3, 42, 10), 0],
-            'Poolp Fiction': [ 'blink', (outp, bank, 4, 2, 64, 13), 0],
-            'mechanicalkeyboards': [ 'blink', (outp, bank, 4, 1, 112, 127), 0],
-            u'Message priv\xe9': [ 'blink', (outp, bank, 3, 2, 45, 12), 0],
-            'Thunderbird': [ 'blink', (outp, bank, 1, 1, 50, 127), 0],
-            'down': [ 'blink', (outp, bank, 2, 1, 42, 10), 0],
-            'critical': [ 'blink', (outp, bank, 2, 2, 50, 13), 0] }
+fp = open(conf_file, 'r')
+js = json.load(fp)
 
+config = {}
 
+for j in js.keys():
+    config[j] = ['blink', (outp, bank, js[j]['line'], js[j]['column'], js[j]['color'], js[j]['mode']), 0 ]
 
 def listen(inp, outp, conf, r):
     while True:
@@ -61,7 +59,8 @@ def print_notification(bus, message):
     args = message.get_args_list()
     if len(args) == 8:
         notification = dict([(keys[i], args[i]) for i in range(8)])
-        print notification
+        print notification['summary']
+        print notification['app_name']
         a = notification['summary']
         if notification['app_name'] == 'Thunderbird':
            a = notification['app_name']

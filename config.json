@@ -1,0 +1,56 @@
+{ 
+   "cs": { 
+      "line": 4,
+      "column": 4,
+      "color": 31,
+      "mode": 6
+   },
+   "mode": {
+      "line": 3,
+      "column": 1,
+      "color": 100,
+      "mode": 14
+   },
+   "general":  {
+      "line": 4,
+      "column": 3,
+      "color": 42,
+      "mode": 10
+   },
+   "Poolp Fiction": {
+      "line": 4,
+      "column": 2,
+      "color": 64,
+      "mode": 13
+   },
+   "mechanicalkeyboards": {
+      "line": 4,
+      "column": 1,
+      "color": 112,
+      "mode": 127
+   },
+   "Message privé": {
+      "line": 3,
+      "column": 2,
+      "color": 45,
+      "mode": 12
+   },
+   "Thunderbird": {
+      "line": 1,
+      "column": 1,
+      "color": 50,
+      "mode": 127
+   },
+   "down": {
+      "line": 2,
+      "column": 1,
+      "color": 42,
+      "mode": 10
+   },
+   "critical": {
+      "line": 2,
+      "column": 2,
+      "color": 50,
+      "mode": 13
+   }
+}

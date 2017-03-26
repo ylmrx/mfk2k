@@ -22,7 +22,6 @@ def cut(out, bank, line, col):
     out.write_short(0xb0, b, 0)
     out.write_short(0xb2, b, 0)
     out.write_short(0xb1, b, default_color)
-    print 'hai'
     active_knob.delete(b)
 
 def blink(out, bank, line, col, color, strobe):
