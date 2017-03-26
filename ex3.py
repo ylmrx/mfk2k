@@ -26,7 +26,11 @@ for i in range(midi.get_count()):
         k2000.initialize_mf(outp, bank)
         break
 
-fp = open(conf_file, 'r')
+if len(sys.argv) > 1:
+    fp = open(sys.argv[1])
+else:
+    fp = open(conf_file, 'r')
+
 js = json.load(fp)
 
 config = {}
